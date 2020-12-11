@@ -361,10 +361,9 @@ const toStringList = (arr) => arr.map((el) => el.toString()).join(',');
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const sortCitiesArray = (arr) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  arr.sort((a, b) => (a.country + a.city > b.country + b.city ? 1 : -1));
 /**
  * Creates an indentity matrix of the specified size
  *
@@ -383,10 +382,9 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
-}
-
+const getIdentityMatrix = (n) => Array(n)
+  .fill(Array(n).fill(0))
+  .map((element, index) => element.map((el, i) => (i === index ? el + 1 : el)));
 /**
  * Creates an array of integers from the specified start to end (inclusive)
  *
@@ -400,10 +398,7 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
-}
-
+const getIntervalArray = (start, end) => Array(end - start + 1).fill(start).map((el, i) => el + i);
 /**
  * Returns array containing only unique values from the specified array.
  *
@@ -415,10 +410,16 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const distinct = (arr) => {
+  const result = [];
+  // eslint-disable-next-line array-callback-return
+  arr.map((el) => {
+    if (!result.includes(el)) {
+      result.push(el);
+    }
+  });
+  return result;
+};
 /**
  * Groups elements of the specified array by key.
  * Returns multimap of keys extracted from array elements via keySelector callback
@@ -449,10 +450,14 @@ function distinct(/* arr */) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
-}
-
+const group = (array, keySelector, valueSelector) => {
+  const map = new Map();
+  array.map((el) => map.set(
+    keySelector(el),
+    (!map.get(keySelector(el)) ? [] : map.get(keySelector(el))).concat([valueSelector(el)]),
+  ));
+  return map;
+};
 /**
  * Projects each element of the specified array to a sequence
  * and flattens the resulting sequences into one array.
@@ -466,10 +471,7 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
-}
-
+const selectMany = (arr, childrenSelector) => [].concat(...arr.map(childrenSelector));
 /**
  * Returns an element from the multidimentional array by the specified indexes.
  *
@@ -482,10 +484,7 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
-}
-
+const getElementByIndexes = (arr, indexes) => indexes.reduce((acc, curr) => acc[curr], arr);
 /**
  * Swaps the head and tail of the specified array:
  * the head (first half) of array move to the end, the tail (last half) move to the start.
@@ -504,10 +503,16 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const swapHeadAndTail = (arr) => {
+  if (arr.length === 1) return arr;
+  const head = arr.slice(0, Math.floor(arr.length / 2));
+  const tail = arr.slice(-Math.floor(arr.length / 2));
+  if (arr.length % 2 === 0) {
+    return [...tail, ...head];
+  }
+  const middle = arr[Math.floor(arr.length / 2)];
+  return [...tail, middle, ...head];
+};
 module.exports = {
   findElement,
   generateOdds,
