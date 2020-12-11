@@ -6,8 +6,6 @@
  * NOTE : Please do not use loops! All tasks can be implmeneted using standard Array methods  *
  *                                                                                            *
  ******************************************************************************************** */
-
-
 /**
  * Returns an index of the specified element in array or -1 if element is not found
  *
@@ -20,10 +18,7 @@
  *    ['Array', 'Number', 'string'], 'Date'    => -1
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
-}
-
+const findElement = (arr, value) => arr.indexOf(value);
 /**
  * Generates an array of odd numbers of the specified length
  *
@@ -35,11 +30,7 @@ function findElement(/* arr, value */) {
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
-}
-
-
+const generateOdds = (len) => Array(len).fill(1).map((el, idx) => el * idx * 2 + 1);
 /**
  * Returns the doubled array - elements of the specified array
  * are repeated twice using original order
@@ -52,11 +43,7 @@ function generateOdds(/* len */) {
  *    [0, 1, 2, 3, 4, 5] => [0, 1, 2, 3, 4, 5,   0, 1, 2, 3, 4, 5]
  *    [] => []
  */
-function doubleArray(/* arr */) {
-  throw new Error('Not implemented');
-}
-
-
+const doubleArray = (arr) => (arr.length > 0 ? Array(2).fill(arr).flat() : []);
 /**
  * Returns an array of positive numbers from the specified array in original order
  *
@@ -68,10 +55,7 @@ function doubleArray(/* arr */) {
  *    [-1, 2, -5, -4, 0] => [ 2 ]
  *    [] => []
  */
-function getArrayOfPositives(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const getArrayOfPositives = (arr) => arr.filter((el) => el > 0);
 /**
  * Returns the array with strings only in the specified array (in original order)
  *
@@ -83,10 +67,7 @@ function getArrayOfPositives(/* arr */) {
  *    [ 1, 2, 3, 4, 5 ] => []
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
-function getArrayOfStrings(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const getArrayOfStrings = (arr) => arr.filter((el) => typeof el === 'string');
 /**
  * Removes falsy values from the specified array
  * Falsy values: false, null, 0, "", undefined, and NaN.
@@ -100,10 +81,7 @@ function getArrayOfStrings(/* arr */) {
  *    [ 1, 2, 3, 4, 5, 'false' ]         => [ 1, 2, 3, 4, 5, 'false' ]
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const removeFalsyValues = (arr) => arr.filter((el) => !el !== true);
 /**
  * Returns the array of uppercase strings from the specified array
  *
@@ -115,11 +93,7 @@ function removeFalsyValues(/* arr */) {
  *    => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ],
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
-function getUpperCaseStrings(/* arr */) {
-  throw new Error('Not implemented');
-}
-
-
+const getUpperCaseStrings = (arr) => arr.map((el) => el.toUpperCase());
 /**
  * Returns the array of string lengths from the specified string array.
  *
@@ -130,10 +104,7 @@ function getUpperCaseStrings(/* arr */) {
  *    [ '', 'a', 'bc', 'def', 'ghij' ]  => [ 0, 1, 2, 3, 4 ]
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
-function getStringsLength(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const getStringsLength = (arr) => arr.map((el) => el.length);
 /**
  * Inserts the item into specified array at specified index
  *
@@ -145,10 +116,7 @@ function getStringsLength(/* arr */) {
  *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(/* arr, item, index */) {
-  throw new Error('Not implemented');
-}
-
+const insertItem = (arr, item, index) => arr.splice(index, 0, item);
 /**
  * Returns the n first items of the specified array
  *
@@ -159,11 +127,7 @@ function insertItem(/* arr, item, index */) {
  *    [ 1, 3, 4, 5 ], 2 => [ 1, 3 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
-function getHead(/* arr, n */) {
-  throw new Error('Not implemented');
-}
-
-
+const getHead = (arr, n) => arr.splice(0, n);
 /**
  * Returns the n last items of the specified array
  *
@@ -174,11 +138,7 @@ function getHead(/* arr, n */) {
  *    [ 1, 3, 4, 5 ], 2  => [ 4, 5 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
-function getTail(/* arr, n */) {
-  throw new Error('Not implemented');
-}
-
-
+const getTail = (arr, n) => arr.splice(arr.length - n, arr.length);
 /**
  * Returns CSV represebtation of two-dimentional numeric array.
  * https://en.wikipedia.org/wiki/Comma-separated_values
@@ -199,10 +159,12 @@ function getTail(/* arr, n */) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const toCsvText = (arr) => arr
+  .reduce((acc, curr) => {
+    const result = `${acc}${curr.join(',')}\n`;
+    return result;
+  }, '')
+  .slice(0, -1);
 /**
  * Transforms the numeric array into the according array of squares:
  *   f(x) = x * x
@@ -214,11 +176,7 @@ function toCsvText(/* arr */) {
  *   [ 0, 1, 2, 3, 4, 5 ] => [ 0, 1, 4, 9, 16, 25 ]
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
-function toArrayOfSquares(/* arr */) {
-  throw new Error('Not implemented');
-}
-
-
+const toArrayOfSquares = (arr) => arr.map((el) => el * el);
 /**
  * Transforms the numeric array to the according moving sum array:
  *     f[n] = x[0] + x[1] + x[2] +...+ x[n]
@@ -233,10 +191,11 @@ function toArrayOfSquares(/* arr */) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const getMovingSum = (arr) => {
+  let previous = 0;
+  // eslint-disable-next-line no-return-assign
+  return arr.map((el) => previous = el + previous);
+};
 /**
  * Returns every second item from the specified array:
  *
@@ -248,11 +207,7 @@ function getMovingSum(/* arr */) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
-}
-
-
+const getSecondItems = (arr) => arr.filter((el, index) => index % 2 !== 0);
 /**
  * Propagates every item in sequence its position times
  * Returns an array that consists of: one first item, two second items, tree third items etc.
@@ -267,11 +222,10 @@ function getSecondItems(/* arr */) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-}
-
-
+// eslint-disable-next-line arrow-body-style
+const propagateItemsByPositionIndex = (arr) => {
+  return arr.map((el, index) => Array(index + 1).fill(el)).flat();
+};
 /**
  * Returns the 3 largest numbers from the specified array
  *
@@ -285,11 +239,7 @@ function propagateItemsByPositionIndex(/* arr */) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
-}
-
-
+const get3TopItems = (arr) => arr.sort((a, b) => b - a).splice(0, 3);
 /**
  * Returns the number of positive numbers from specified array
  *
@@ -303,10 +253,7 @@ function get3TopItems(/* arr */) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const getPositivesCount = (arr) => arr.filter((el) => el > 0 && typeof el === 'number').length;
 /**
  * Sorts digit names
  *
@@ -320,10 +267,21 @@ function getPositivesCount(/* arr */) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const sortDigitNamesByNumericOrder = (arr) => {
+  const names = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  return arr.sort((a, b) => names.indexOf(a) - names.indexOf(b));
+};
 /**
  * Returns the sum of all items in the specified array of numbers
  *
@@ -336,10 +294,7 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   [ -1, 1, -1, 1 ]      => 0
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
-function getItemsSum(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const getItemsSum = (arr) => (arr.length > 0 ? arr.reduce((acc, curr) => acc + curr) : 0);
 /**
  * Returns the number of all falsy value in the specified array
  *
@@ -352,10 +307,7 @@ function getItemsSum(/* arr */) {
  *  [ -1, 'false', null, 0 ] => 2
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
-}
-
+const getFalsyValuesCount = (arr) => arr.filter((element) => !element !== false).length;
 /**
  * Returns a number of all occurences of the specified item in an array
  *
@@ -370,10 +322,7 @@ function getFalsyValuesCount(/* arr */) {
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-function findAllOccurences(/* arr, item */) {
-  throw new Error('Not implemented');
-}
-
+const findAllOccurences = (arr, item) => arr.filter((el) => el === item).length;
 /**
  * Concatenates all elements from specified array into single string with ',' delimeter
  *
@@ -385,11 +334,7 @@ function findAllOccurences(/* arr, item */) {
  *    [1, 2, 3, 4, 5]                   => '1,2,3,4,5'
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
-}
-
-
+const toStringList = (arr) => arr.map((el) => el.toString()).join(',');
 /**
  * Sorts the specified array by country name first and city name
  * (if countries are equal) in ascending order.
@@ -508,7 +453,6 @@ function group(/* array, keySelector, valueSelector */) {
   throw new Error('Not implemented');
 }
 
-
 /**
  * Projects each element of the specified array to a sequence
  * and flattens the resulting sequences into one array.
@@ -526,7 +470,6 @@ function selectMany(/* arr, childrenSelector */) {
   throw new Error('Not implemented');
 }
 
-
 /**
  * Returns an element from the multidimentional array by the specified indexes.
  *
@@ -542,7 +485,6 @@ function selectMany(/* arr, childrenSelector */) {
 function getElementByIndexes(/* arr, indexes */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Swaps the head and tail of the specified array:
@@ -565,7 +507,6 @@ function getElementByIndexes(/* arr, indexes */) {
 function swapHeadAndTail(/* arr */) {
   throw new Error('Not implemented');
 }
-
 
 module.exports = {
   findElement,
