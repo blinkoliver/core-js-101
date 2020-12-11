@@ -5,8 +5,6 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date     *
  *                                                                                           *
  ******************************************************************************************* */
-
-
 /**
  * Parses a rfc2822 string date representation into date value
  * For rfc2822 date specification refer to : http://tools.ietf.org/html/rfc2822#page-14
@@ -19,10 +17,7 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-function parseDataFromRfc2822(/* value */) {
-  throw new Error('Not implemented');
-}
-
+const parseDataFromRfc2822 = (value) => new Date(value);
 /**
  * Parses an ISO 8601 string date representation into date value
  * For ISO 8601 date specification refer to : https://en.wikipedia.org/wiki/ISO_8601
@@ -34,11 +29,7 @@ function parseDataFromRfc2822(/* value */) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-function parseDataFromIso8601(/* value */) {
-  throw new Error('Not implemented');
-}
-
-
+const parseDataFromIso8601 = (value) => new Date(value);
 /**
  * Returns true if specified date is leap year and false otherwise
  * Please find algorithm here: https://en.wikipedia.org/wiki/Leap_year#Algorithm
@@ -53,11 +44,12 @@ function parseDataFromIso8601(/* value */) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
-}
-
-
+const isLeapYear = (date) => {
+  if (date.getFullYear() % 4 !== 0) return false;
+  if (date.getFullYear() % 100 !== 0) return true;
+  if (date.getFullYear() % 400 !== 0) return false;
+  return true;
+};
 /**
  * Returns the string represention of the timespan between two dates.
  * The format of output string is "HH:mm:ss.sss"
@@ -67,17 +59,25 @@ function isLeapYear(/* date */) {
  * @return {string}
  *
  * @example:
- *    Date(2000,1,1,10,0,0),  Date(2000,1,1,11,0,0)   => "01:00:00.000"
- *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,30,0)       => "00:30:00.000"
+ *    Date(2000,1,1,10,0,0),  Date(2000,1,1,11,0,0)         => "01:00:00.000"
+ *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,30,0)        => "00:30:00.000"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,20)        => "00:00:20.000"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-function timeSpanToString(/* startDate, endDate */) {
-  throw new Error('Not implemented');
-}
-
-
+const timeSpanToString = (startDate, endDate) => {
+  const hours = endDate.getHours() - startDate.getHours();
+  const minutes = endDate.getMinutes() === 0
+    ? `0${endDate.getMinutes() - startDate.getMinutes()}`
+    : endDate.getMinutes() - startDate.getMinutes();
+  const seconds = endDate.getSeconds() === 0
+    ? `0${endDate.getSeconds() - startDate.getSeconds()}`
+    : endDate.getSeconds() - startDate.getSeconds();
+  const mill = endDate.getMilliseconds() === 0
+    ? `00${endDate.getMilliseconds() - startDate.getMilliseconds()}`
+    : endDate.getMilliseconds() - startDate.getMilliseconds();
+  return `0${hours}:${minutes}:${seconds}.${mill}`;
+};
 /**
  * Returns the angle (in radians) between the hands of an analog clock
  * for the specified Greenwich time.
@@ -94,11 +94,15 @@ function timeSpanToString(/* startDate, endDate */) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(/* date */) {
-  throw new Error('Not implemented');
-}
-
-
+const angleBetweenClockHands = (date) => {
+  const hourArrowCircle = 1000 * 60 * 60 * 12;
+  const minuteArrowCircle = 1000 * 60 * 60;
+  const hourAngle = (360 * (date % hourArrowCircle)) / hourArrowCircle;
+  const minuteAngle = (360 * (date % minuteArrowCircle)) / minuteArrowCircle;
+  let angle = Math.abs(minuteAngle - hourAngle);
+  if (angle > 180) angle = 360 - angle;
+  return (angle * 2 * Math.PI) / 360;
+};
 module.exports = {
   parseDataFromRfc2822,
   parseDataFromIso8601,

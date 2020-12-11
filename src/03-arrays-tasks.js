@@ -192,9 +192,12 @@ const toArrayOfSquares = (arr) => arr.map((el) => el * el);
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 const getMovingSum = (arr) => {
-  let previous = 0;
-  // eslint-disable-next-line no-return-assign
-  return arr.map((el) => previous = el + previous);
+  const res = [];
+  arr.map((el, idx) => {
+    res.push(idx > 0 ? res[idx - 1] + el : el);
+    return arr;
+  });
+  return res;
 };
 /**
  * Returns every second item from the specified array:
@@ -222,10 +225,10 @@ const getSecondItems = (arr) => arr.filter((el, index) => index % 2 !== 0);
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-// eslint-disable-next-line arrow-body-style
-const propagateItemsByPositionIndex = (arr) => {
+
+function propagateItemsByPositionIndex(arr) {
   return arr.map((el, index) => Array(index + 1).fill(el)).flat();
-};
+}
 /**
  * Returns the 3 largest numbers from the specified array
  *
@@ -361,9 +364,9 @@ const toStringList = (arr) => arr.map((el) => el.toString()).join(',');
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-const sortCitiesArray = (arr) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  arr.sort((a, b) => (a.country + a.city > b.country + b.city ? 1 : -1));
+function sortCitiesArray(arr) {
+  return arr.sort((a, b) => (a.country + a.city > b.country + b.city ? 1 : -1));
+}
 /**
  * Creates an indentity matrix of the specified size
  *
@@ -410,16 +413,11 @@ const getIntervalArray = (start, end) => Array(end - start + 1).fill(start).map(
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-const distinct = (arr) => {
-  const result = [];
-  // eslint-disable-next-line array-callback-return
-  arr.map((el) => {
-    if (!result.includes(el)) {
-      result.push(el);
-    }
-  });
-  return result;
-};
+const distinct = (arr) => arr.reduce((a, b) => {
+  const res = a;
+  if (!res.includes(b)) res.push(b);
+  return res;
+}, []);
 /**
  * Groups elements of the specified array by key.
  * Returns multimap of keys extracted from array elements via keySelector callback
