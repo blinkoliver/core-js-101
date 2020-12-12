@@ -7,8 +7,6 @@
  * https://regexr.com                                                                        *
  *                                                                                           *
  ******************************************************************************************* */
-
-
 /**
  * Returns the regexp that matches a GUID string representation
  * '{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}',
@@ -28,14 +26,10 @@
  *   '677E2553DD4D43B09DA77414DB1EB8EA'
  *   '0c74f13f-fa83-4c48-9b33-68921dd72463'
  *   'The roof, the roof, the roof is on fire'
- *
+ *0c74f13f-fa83-4c48-9b33-68921dd72463
  * @return {RegExp}
  */
-function getRegexForGuid() {
-  throw new Error('Not implemented');
-}
-
-
+const getRegexForGuid = () => /{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}}/;
 /**
  * Returns the regexp that matches all the strings from first column
  * but of them from the second
@@ -53,11 +47,7 @@ function getRegexForGuid() {
  * @return {RegExp}
  *
  */
-function getRegexForPitSpot() {
-  throw new Error('Not implemented');
-}
-
-
+const getRegexForPitSpot = () => /p.t/;
 /**
  * Returns the password validator regex.
  * Regex will validate a password to make sure it meets the follwing criteria:
@@ -78,11 +68,9 @@ function getRegexForPitSpot() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(/* minLength */) {
-  throw new Error('Not implemented');
-}
-
-
+const getPasswordValidator = (minLength) => new RegExp(
+  `^[^s+](?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{${minLength},}[^s+]$`,
+);
 module.exports = {
   getRegexForGuid,
   getRegexForPitSpot,
